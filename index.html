@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>铭记历史 - 南京大屠杀与 731 部队</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'SimSun', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        
+        /* 头部 */
+        .header {
+            background: linear-gradient(180deg, #1a0a0a 0%, #0a0a0a 100%);
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 3px solid #8b0000;
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            color: #c0c0c0;
+            margin-bottom: 20px;
+            letter-spacing: 8px;
+            text-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            color: #888;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header .memorial {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #8b0000;
+            font-weight: bold;
+        }
+        
+        /* 导航 */
+        .nav {
+            background: #111;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .nav a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .nav a:hover {
+            background: #8b0000;
+            color: #fff;
+        }
+        
+        /* 主体内容 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+            background: #111;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #222;
+        }
+        
+        .section-header {
+            background: linear-gradient(90deg, #8b0000, #1a0a0a);
+            padding: 25px 30px;
+            border-bottom: 2px solid #8b0000;
+        }
+        
+        .section-header h2 {
+            font-size: 28px;
+            color: #fff;
+            letter-spacing: 4px;
+        }
+        
+        .section-header .date {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        
+        .section-content {
+            padding: 30px;
+        }
+        
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            border-left: 3px solid #8b0000;
+            margin: 30px 0;
+        }
+        
+        .timeline-item {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: #8b0000;
+            border-radius: 50%;
+        }
+        
+        .timeline-date {
+            color: #8b0000;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .timeline-content {
+            margin-top: 8px;
+            color: #ccc;
+        }
+        
+        /* 数据统计 */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: #1a0a0a;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #8b0000;
+        }
+        
+        .stat-number {
+            font-size: 42px;
+            font-weight: bold;
+            color: #8b0000;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        /* 引用 */
+        .quote {
+            background: #1a0a0a;
+            border-left: 4px solid #8b0000;
+            padding: 20px 25px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #aaa;
+        }
+        
+        .quote cite {
+            display: block;
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* 图片网格 */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .photo-card {
+            background: #1a0a0a;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .photo-placeholder {
+            height: 180px;
+            background: linear-gradient(135deg, #222, #111);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .photo-info {
+            padding: 15px;
+        }
+        
+        .photo-title {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .photo-desc {
+            color: #888;
+            font-size: 12px;
+        }
+        
+        /* 警示框 */
+        .warning {
+            background: rgba(139, 0, 0, 0.2);
+            border: 1px solid #8b0000;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin: 25px 0;
+        }
+        
+        .warning-title {
+            color: #8b0000;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .warning-content {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* 列表 */
+        .fact-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .fact-list li {
+            padding: 12px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #ccc;
+            border-bottom: 1px solid #222;
+        }
+        
+        .fact-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #8b0000;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: #0a0a0a;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 3px solid #8b0000;
+            margin-top: 60px;
+        }
+        
+        .footer-text {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-memorial {
+            color: #8b0000;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+        
+        .candle {
+            margin-top: 30px;
+            font-size: 40px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+                letter-spacing: 4px;
+            }
+            
+            .nav ul {
+                gap: 20px;
+            }
+            
+            .section-header h2 {
+                font-size: 22px;
+            }
+            
+            .stat-number {
+                font-size: 32px;
+            }
+        }
+        
+        /* 哀悼日横幅 */
+        .memorial-banner {
+            background: #8b0000;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 国家公祭日提醒 -->
+    <div class="memorial-banner">
+        🕯️ 12 月 13 日 南京大屠杀死难者国家公祭日
+    </div>
+    
+    <!-- 头部 -->
+    <div class="header">
+        <h1>铭记历史</h1>
+        <div class="subtitle">
+            纪念南京大屠杀与 731 部队遇难同胞<br>
+            勿忘国耻 · 珍爱和平 · 振兴中华
+        </div>
+        <div class="memorial">
+            1931-1945 抗日战争时期
+        </div>
+    </div>
+    
+    <!-- 导航 -->
+    <nav class="nav">
+        <ul>
+            <li><a href="#nanjing">南京大屠杀</a></li>
+            <li><a href="#unit731">731 部队</a></li>
+            <li><a href="#timeline">历史时间线</a></li>
+            <li><a href="#evidence">历史证据</a></li>
+            <li><a href="#reflection">反思与警示</a></li>
+        </ul>
+    </nav>
+    
+    <!-- 主体内容 -->
+    <div class="container">
+        
+        <!-- 南京大屠杀 -->
+        <section id="nanjing" class="section">
+            <div class="section-header">
+                <h2>🕯️ 南京大屠杀</h2>
+                <div class="date">1937 年 12 月 13 日 - 1938 年 1 月</div>
+            </div>
+            <div class="section-content">
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">300,000+</div>
+                        <div class="stat-label">遇难同胞</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">6 周</div>
+                        <div class="stat-label">屠杀持续时间</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">20,000+</div>
+                        <div class="stat-label">妇女遭强奸</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1/3</div>
+                        <div class="stat-label">城市被焚毁</div>
+                    </div>
+                </div>
+                
+                <h3 style="color: #ccc; margin: 25px 0 15px;">事件概述</h3>
+                <p style="color: #aaa; margin-bottom: 20px;">
+                    南京大屠杀是第二次世界大战期间，日本侵华军队在占领中华民国首都南京后实施的
+                    大规模屠杀、强奸、抢劫和纵火等战争罪行。这场惨绝人寰的暴行持续了 6 周之久，
+                    造成 30 万以上中国平民和战俘遇害，是二战中最严重的战争罪行之一。
+                </p>
+                
+                <div class="warning">
+                    <div class="warning-title">⚠️ 历史事实</div>
+                    <div class="warning-content">
+                        南京大屠杀是经过远东国际军事法庭和南京审判战犯军事法庭确认的历史事实，
+                        有大量的历史档案、照片、影像资料和幸存者证言作为证据。任何否认或美化
+                        南京大屠杀的言行都是对历史的亵渎，对遇难者的不敬。
+                    </div>
+                </div>
+                
+                <h3 style="color: #ccc; margin: 25px 0 15px;">主要暴行</h3>
+                <ul class="fact-list">
+                    <li><strong>集体屠杀：</strong>日军对南京平民和战俘进行大规模集体枪杀、活埋、焚烧</li>
+                    <li><strong>个体屠杀：</strong>日军以"杀人竞赛"为乐，见人就杀，甚至对婴幼儿也不放过</li>
+                    <li><strong>强奸暴行：</strong>大量妇女遭到强奸，事后常被杀害，受害者年龄从 9 岁到 77 岁不等</li>
+                    <li><strong>抢劫掠夺：</strong>日军洗劫南京城，抢夺财物、牲畜、粮食，纵火焚烧建筑</li>
+                    <li><strong>文化破坏：</strong>大量文物古迹、图书典籍被毁坏或掠夺至日本</li>
+                </ul>
+                
+                <div class="quote">
+                    "南京是一座悲惨的城市，它见证了人类历史上最黑暗的一页。"
+                    <cite>——《拉贝日记》</cite>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 731 部队 -->
+        <section id="unit731" class="section">
+            <div class="section-header">
+                <h2>☠️ 731 部队</h2>
+                <div class="date">1935 年 - 1945 年</div>
+            </div>
+            <div class="section-content">
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">3,000+</div>
+                        <div class="stat-label">活体实验受害者</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">300,000+</div>
+                        <div class="stat-label">细菌战受害者</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10 年</div>
+                        <div class="stat-label">罪恶活动时长</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">26 种</div>
+                        <div class="stat-label">致命细菌研发</div>
+                    </div>
+                </div>
+                
+                <h3 style="color: #ccc; margin: 25px 0 15px;">部队简介</h3>
+                <p style="color: #aaa; margin-bottom: 20px;">
+                    731 部队是日本侵华期间，在日本陆军参谋本部和日本天皇批准下，于中国哈尔滨平房区
+                    设立的生物战、化学战研究和实验部队，全称为"关东军防疫给水部"。该部队以中国人、
+                    朝鲜人、苏联人等为活体实验对象，进行惨无人道的人体实验和细菌武器研发。
+                </p>
+                
+                <div class="warning">
+                    <div class="warning-title">⚠️ 特别警示</div>
+                    <div class="warning-content">
+                        731 部队的罪行是人类历史上最黑暗的篇章之一。战后，美国为获取 731 部队的
+                        实验数据，包庇了包括石井四郎在内的战犯，使其逃脱了东京审判。这是人类
+                        正义史上的一大污点。
+                    </div>
+                </div>
+                
+                <h3 style="color: #ccc; margin: 25px 0 15px;">主要罪行</h3>
+                <ul class="fact-list">
+                    <li><strong>活体解剖：</strong>在不使用麻醉的情况下对活人进行解剖实验</li>
+                    <li><strong>细菌实验：</strong>向人体注射鼠疫、霍乱、炭疽等致命病菌</li>
+                    <li><strong>冻伤实验：</strong>将受害者四肢暴露于极寒环境，研究冻伤治疗</li>
+                    <li><strong>毒气实验：</strong>在密闭空间释放毒气，观察受害者死亡过程</li>
+                    <li><strong>母婴实验：</strong>对孕妇进行活体解剖，研究母婴感染传播</li>
+                    <li><strong>人马实验：</strong>将人马血液互换，研究血液置换效果</li>
+                    <li><strong>细菌战：</strong>在中国多地投放细菌武器，造成大量平民死亡</li>
+                </ul>
+                
+                <div class="quote">
+                    "这些人不是人，是'马路大'（意为'原木'）。"
+                    <cite>—— 731 部队成员对受害者的称呼</cite>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 历史时间线 -->
+        <section id="timeline" class="section">
+            <div class="section-header">
+                <h2>📜 历史时间线</h2>
+                <div class="date">1931-1945 抗日战争重大事件</div>
+            </div>
+            <div class="section-content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">1931 年 9 月 18 日</div>
+                        <div class="timeline-content">
+                            <strong>九一八事变</strong> - 日本关东军炸毁南满铁路，嫁祸中国军队，随后侵占中国东北三省
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1935 年</div>
+                        <div class="timeline-content">
+                            <strong>731 部队成立</strong> - 日本在中国哈尔滨设立 731 部队，开始细菌武器研究
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1937 年 7 月 7 日</div>
+                        <div class="timeline-content">
+                            <strong>卢沟桥事变</strong> - 日本发动全面侵华战争，中国全民族抗战开始
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1937 年 12 月 13 日</div>
+                        <div class="timeline-content">
+                            <strong>南京沦陷</strong> - 日军攻占南京，开始长达 6 周的大屠杀
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1938 年</div>
+                        <div class="timeline-content">
+                            <strong>细菌战开始</strong> - 731 部队在中国多地实施细菌战，造成大量平民死亡
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1941 年 12 月 7 日</div>
+                        <div class="timeline-content">
+                            <strong>珍珠港事件</strong> - 日本偷袭珍珠港，太平洋战争爆发
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1945 年 8 月 15 日</div>
+                        <div class="timeline-content">
+                            <strong>日本投降</strong> - 日本宣布无条件投降，抗日战争胜利结束
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">1946 年 5 月</div>
+                        <div class="timeline-content">
+                            <strong>东京审判</strong> - 远东国际军事法庭开庭，审判日本战犯
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2014 年 2 月</div>
+                        <div class="timeline-content">
+                            <strong>国家公祭日设立</strong> - 中国设立南京大屠杀死难者国家公祭日（12 月 13 日）
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 历史证据 -->
+        <section id="evidence" class="section">
+            <div class="section-header">
+                <h2>📚 历史证据</h2>
+                <div class="date">铁证如山，不容篡改</div>
+            </div>
+            <div class="section-content">
+                <h3 style="color: #ccc; margin: 25px 0 15px;">证据类型</h3>
+                
+                <div class="photo-grid">
+                    <div class="photo-card">
+                        <div class="photo-placeholder">📷 历史照片</div>
+                        <div class="photo-info">
+                            <div class="photo-title">历史影像资料</div>
+                            <div class="photo-desc">大量当时的照片记录了日军暴行</div>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-placeholder">📄 档案文献</div>
+                        <div class="photo-info">
+                            <div class="photo-title">日军档案</div>
+                            <div class="photo-desc">日本军方自己的记录文件</div>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-placeholder">👤 幸存者证言</div>
+                        <div class="photo-info">
+                            <div class="photo-title">幸存者口述</div>
+                            <div class="photo-desc">亲历者的证言是最直接的证据</div>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-placeholder">📹 影像资料</div>
+                        <div class="photo-info">
+                            <div class="photo-title">纪录片</div>
+                            <div class="photo-desc">《二十二》《金陵十三钗》等</div>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-placeholder">📖 第三方记录</div>
+                        <div class="photo-info">
+                            <div class="photo-title">西方人士记录</div>
+                            <div class="photo-desc">《拉贝日记》《魏特琳日记》等</div>
+                        </div>
+                    </div>
+                    <div class="photo-card">
+                        <div class="photo-placeholder">⚖️ 法庭记录</div>
+                        <div class="photo-info">
+                            <div class="photo-title">审判档案</div>
+                            <div class="photo-desc">东京审判和南京审判的法庭记录</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="warning">
+                    <div class="warning-title">📖 重要文献推荐</div>
+                    <div class="warning-content">
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>《拉贝日记》- 约翰·拉贝（德国商人，南京安全区主席）</li>
+                            <li>《魏特琳日记》- 明妮·魏特琳（美国传教士）</li>
+                            <li>《南京大屠杀》- 张纯如（美籍华裔作家）</li>
+                            <li>《东史郎日记》- 东史郎（日本侵华士兵，后忏悔）</li>
+                            <li>《731 部队》- 森村诚一（日本作家）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 反思与警示 -->
+        <section id="reflection" class="section">
+            <div class="section-header">
+                <h2>🕊️ 反思与警示</h2>
+                <div class="date">铭记历史，不是为了仇恨</div>
+            </div>
+            <div class="section-content">
+                <h3 style="color: #ccc; margin: 25px 0 15px;">我们为什么要铭记？</h3>
+                
+                <ul class="fact-list">
+                    <li><strong>铭记历史真相：</strong>防止历史被篡改和遗忘，让后人了解真实的历史</li>
+                    <li><strong>悼念遇难同胞：</strong>缅怀 3000 万抗战伤亡同胞，告慰逝者</li>
+                    <li><strong>警示后人：</strong>让战争悲剧不再重演，珍爱和平</li>
+                    <li><strong>振兴中华：</strong>激励国人奋发图强，建设强大祖国</li>
+                    <li><strong>维护正义：</strong>捍卫历史真相，反对任何美化侵略的言行</li>
+                </ul>
+                
+                <div class="quote">
+                    "可以宽恕，但不可以忘记。宽恕是美德，但忘记是背叛。"
+                    <cite>—— 南京大屠杀幸存者 李秀英</cite>
+                </div>
+                
+                <div class="warning">
+                    <div class="warning-title">⚠️ 警惕历史虚无主义</div>
+                    <div class="warning-content">
+                        当前，日本右翼势力仍在试图否认和美化侵略历史，包括：
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>否认南京大屠杀死亡人数</li>
+                            <li>美化侵略战争为"圣战"</li>
+                            <li>政客参拜供奉战犯的靖国神社</li>
+                            <li>修改教科书，篡改历史</li>
+                        </ul>
+                        我们必须保持高度警惕，坚决捍卫历史真相。
+                    </div>
+                </div>
+                
+                <h3 style="color: #ccc; margin: 25px 0 15px;">我们能做什么？</h3>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">📚</div>
+                        <div class="stat-label">学习历史<br>了解真相</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">🕯️</div>
+                        <div class="stat-label">悼念同胞<br>铭记历史</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">💪</div>
+                        <div class="stat-label">建设祖国<br>振兴中华</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">🕊️</div>
+                        <div class="stat-label">珍爱和平<br>反对战争</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-text">
+            铭记历史 · 勿忘国耻 · 珍爱和平 · 振兴中华
+        </div>
+        <div class="footer-memorial">
+            🕯️ 悼念南京大屠杀遇难同胞 🕯️
+        </div>
+        <div class="footer-text" style="margin-top: 20px;">
+            2014 年 2 月 27 日，十二届全国人大常委会第七次会议通过决定，<br>
+            将 12 月 13 日设立为南京大屠杀死难者国家公祭日
+        </div>
+        <div class="candle">
+            🕯️ 🕯️ 🕯️
+        </div>
+        <div class="footer-text" style="margin-top: 30px; color: #444;">
+            本网站仅供历史教育用途 | 铭记历史，不是为了仇恨，而是为了和平
+        </div>
+    </footer>
+    
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // 国家公祭日提醒（12 月 13 日）
+        const today = new Date();
+        const memorialDay = new Date(today.getFullYear(), 11, 13); // 11 代表 12 月
+        const daysUntilMemorial = Math.ceil((memorialDay - today) / (1000 * 60 * 60 * 24));
+        
+        if (daysUntilMemorial === 0) {
+            document.querySelector('.memorial-banner').innerHTML = 
+                '🕯️ 今天是南京大屠杀死难者国家公祭日 · 请默哀 🕯️';
+        } else if (daysUntilMemorial > 0 && daysUntilMemorial <= 7) {
+            document.querySelector('.memorial-banner').innerHTML = 
+                `🕯️ 距离国家公祭日还有 ${daysUntilMemorial} 天 · 铭记历史 🕯️`;
+        }
+    </script>
+</body>
+</html>
