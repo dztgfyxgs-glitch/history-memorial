@@ -278,11 +278,14 @@
             padding: 25px;
             border-radius: 8px;
             border: 1px solid #8b0000;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            cursor: pointer;
         }
         
         .evidence-card:hover {
             transform: translateY(-5px);
+            background: #2a0a0a;
+            box-shadow: 0 5px 20px rgba(139, 0, 0, 0.3);
         }
         
         .evidence-icon {
@@ -299,6 +302,80 @@
         .evidence-desc {
             color: #aaa;
             line-height: 1.8;
+        }
+        
+        /* 详细资料面板 */
+        .detail-panel {
+            display: none;
+            background: #1a0a0a;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #8b0000;
+            margin-top: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .detail-panel.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .detail-panel h4 {
+            color: #8b0000;
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #8b0000;
+        }
+        
+        .detail-list {
+            list-style: none;
+        }
+        
+        .detail-list li {
+            padding: 12px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #ccc;
+            border-bottom: 1px solid #222;
+            line-height: 1.6;
+        }
+        
+        .detail-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #8b0000;
+        }
+        
+        .detail-list li a {
+            color: #00ffff;
+            text-decoration: none;
+        }
+        
+        .detail-list li a:hover {
+            text-decoration: underline;
+        }
+        
+        .close-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: #8b0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .close-btn:hover {
+            background: #a00000;
         }
         
         /* 详细资料列表 */
@@ -539,44 +616,127 @@
                 <div class="date">铁证如山，不容篡改</div>
             </div>
             <div class="section-content">
-                <h3 style="color: #ccc; margin: 25px 0 15px;">证据类型</h3>
+                <h3 style="color: #ccc; margin: 25px 0 15px;">证据类型（点击卡片查看详情）</h3>
                 
                 <div class="evidence-grid">
-                    <div class="evidence-card">
+                    <div class="evidence-card" onclick="toggleDetail('photo')">
                         <div class="evidence-icon">📷</div>
                         <h4 class="evidence-title">历史照片</h4>
                         <p class="evidence-desc">历史影像资料<br>大量当时的照片记录了日军暴行</p>
                     </div>
                     
-                    <div class="evidence-card">
+                    <div class="evidence-card" onclick="toggleDetail('archive')">
                         <div class="evidence-icon">📄</div>
                         <h4 class="evidence-title">档案文献</h4>
                         <p class="evidence-desc">日军档案<br>日本军方自己的记录文件</p>
                     </div>
                     
-                    <div class="evidence-card">
+                    <div class="evidence-card" onclick="toggleDetail('survivor')">
                         <div class="evidence-icon">👤</div>
                         <h4 class="evidence-title">幸存者证言</h4>
                         <p class="evidence-desc">幸存者口述<br>亲历者的证言是最直接的证据</p>
                     </div>
                     
-                    <div class="evidence-card">
+                    <div class="evidence-card" onclick="toggleDetail('video')">
                         <div class="evidence-icon">📹</div>
                         <h4 class="evidence-title">影像资料</h4>
                         <p class="evidence-desc">纪录片<br>《二十二》《金陵十三钗》等</p>
                     </div>
                     
-                    <div class="evidence-card">
+                    <div class="evidence-card" onclick="toggleDetail('third-party')">
                         <div class="evidence-icon">📖</div>
                         <h4 class="evidence-title">第三方记录</h4>
                         <p class="evidence-desc">西方人士记录<br>《拉贝日记》《魏特琳日记》等</p>
                     </div>
                     
-                    <div class="evidence-card">
+                    <div class="evidence-card" onclick="toggleDetail('court')">
                         <div class="evidence-icon">⚖️</div>
                         <h4 class="evidence-title">法庭记录</h4>
                         <p class="evidence-desc">审判档案<br>东京审判和南京审判的法庭记录</p>
                     </div>
+                </div>
+                
+                <!-- 详细资料面板 -->
+                <div id="detail-photo" class="detail-panel">
+                    <h4>📷 历史照片详细资料</h4>
+                    <ul class="detail-list">
+                        <li><strong>南京大屠杀期间外国传教士拍摄的照片</strong> - 保存在美国耶鲁大学神学院图书馆</li>
+                        <li><strong>日军士兵自己拍摄的照片</strong> - 战后带回日本，部分公开</li>
+                        <li><strong>战后军事法庭收集的证据照片</strong> - 远东国际军事法庭档案</li>
+                        <li><strong>红十字会等组织记录的照片</strong> - 国际红十字会档案</li>
+                        <li><strong>中国第二历史档案馆照片档案</strong> - 数千张原始照片</li>
+                        <li><strong>在线查看</strong>：<a href="http://www.19371213.org.cn/" target="_blank">南京大屠杀纪念馆官网</a></li>
+                    </ul>
+                    <button class="close-btn" onclick="closeDetail()">关闭</button>
+                </div>
+                
+                <div id="detail-archive" class="detail-panel">
+                    <h4>📄 档案文献详细资料</h4>
+                    <ul class="detail-list">
+                        <li><strong>日本防卫厅战史室《战史丛书》</strong> - 官方编纂的战争史</li>
+                        <li><strong>日军华中方面军战斗详报</strong> - 日军自己的作战记录</li>
+                        <li><strong>第 10 军作战命令及战斗详报</strong> - 进攻南京的部队记录</li>
+                        <li><strong>各师团联队的作战记录</strong> - 基层部队战斗日志</li>
+                        <li><strong>日本外务省外交史料馆档案</strong> - 外交文书和报告</li>
+                        <li><strong>中国第二历史档案馆</strong>：<a href="http://www.shac.net.cn/" target="_blank">www.shac.net.cn</a></li>
+                    </ul>
+                    <button class="close-btn" onclick="closeDetail()">关闭</button>
+                </div>
+                
+                <div id="detail-survivor" class="detail-panel">
+                    <h4>👤 幸存者证言详细资料</h4>
+                    <ul class="detail-list">
+                        <li><strong>李秀英</strong> - 身中 37 刀幸存，后赴日本作证</li>
+                        <li><strong>夏淑琴</strong> - 全家 9 口 7 人遇害，8 岁幸存</li>
+                        <li><strong>管光镜</strong> - 亲眼目睹大屠杀，多次作证</li>
+                        <li><strong>艾义英</strong> - 丈夫被日军杀害，独自抚养子女</li>
+                        <li><strong>马庭禄</strong> - 父亲和舅舅遇害，致力于证言传播</li>
+                        <li><strong>现存幸存者</strong> - 不足 100 人（2026 年），平均年龄 90+ 岁</li>
+                        <li><strong>证言视频</strong>：<a href="http://www.19371213.org.cn/" target="_blank">纪念馆官网</a></li>
+                    </ul>
+                    <button class="close-btn" onclick="closeDetail()">关闭</button>
+                </div>
+                
+                <div id="detail-video" class="detail-panel">
+                    <h4>📹 影像资料详细列表</h4>
+                    <ul class="detail-list">
+                        <li><strong>《二十二》（2017）</strong> - 慰安妇幸存者纪录片，导演郭柯</li>
+                        <li><strong>《金陵十三钗》（2011）</strong> - 张艺谋导演，电影</li>
+                        <li><strong>《南京！南京！》（2009）</strong> - 陆川导演，电影</li>
+                        <li><strong>《拉贝日记》（2009）</strong> - 中德合拍，电影</li>
+                        <li><strong>NHK《731 部队的真相》</strong> - 日本 NHK 电视台纪录片</li>
+                        <li><strong>央视《东方主战场》</strong> - 8 集纪录片，2015 年</li>
+                        <li><strong>《南京大屠杀档案》</strong> - 央视纪录片，2014 年</li>
+                        <li><strong>B 站专题</strong>：<a href="https://www.bilibili.com/" target="_blank">www.bilibili.com</a> 搜索"南京大屠杀"</li>
+                    </ul>
+                    <button class="close-btn" onclick="closeDetail()">关闭</button>
+                </div>
+                
+                <div id="detail-third-party" class="detail-panel">
+                    <h4>📖 第三方记录详细列表</h4>
+                    <ul class="detail-list">
+                        <li><strong>《拉贝日记》</strong> - 约翰·拉贝（德国商人，南京安全区主席），ISBN: 978-7806096680</li>
+                        <li><strong>《魏特琳日记》</strong> - 明妮·魏特琳（美国传教士，金陵女子大学校长），ISBN: 978-7806096697</li>
+                        <li><strong>《外人目睹中之日军暴行》</strong> - 田伯烈（英国记者），1938 年出版</li>
+                        <li><strong>《南京暴行》</strong> - 张纯如（美籍华裔作家），1997 年，ISBN: 978-7508611471</li>
+                        <li><strong>《美国传教士眼中的南京大屠杀》</strong> - 编译本，多份传教士记录</li>
+                        <li><strong>《东京日日新闻》报道</strong> - 日本当时报纸，记载"百人斩"竞赛</li>
+                        <li><strong>购买链接</strong>：<a href="https://book.douban.com/" target="_blank">豆瓣读书</a></li>
+                    </ul>
+                    <button class="close-btn" onclick="closeDetail()">关闭</button>
+                </div>
+                
+                <div id="detail-court" class="detail-panel">
+                    <h4>⚖️ 法庭记录详细列表</h4>
+                    <ul class="detail-list">
+                        <li><strong>远东国际军事法庭审判记录</strong> - 东京审判（1946-1948），53 卷庭审记录</li>
+                        <li><strong>中国南京审判战犯军事法庭记录</strong> - 1947 年，审判谷寿夫等战犯</li>
+                        <li><strong>谷寿夫案审判档案</strong> - 南京大屠杀主犯之一，1947 年枪决</li>
+                        <li><strong>松井石根审判记录</strong> - 日军华中方面军司令，甲级战犯，绞刑</li>
+                        <li><strong>东条英机等甲级战犯审判档案</strong> - 28 名甲级战犯审判记录</li>
+                        <li><strong>在线查阅</strong>：<a href="https://www.jacar.go.jp/" target="_blank">日本亚洲历史资料中心</a></li>
+                    </ul>
+                    <button class="close-btn" onclick="closeDetail()">关闭</button>
                 </div>
             </div>
         </section>
@@ -595,7 +755,8 @@
                         <h4>侵华日军南京大屠杀遇难同胞纪念馆</h4>
                         <ul>
                             <li>地址：南京市建邺区水西门大街 418 号</li>
-                            <li>官网：<a href="http://www.nj1937.org/" target="_blank">www.nj1937.org</a></li>
+                            <li>官网：<a href="http://www.19371213.org.cn/" target="_blank">www.19371213.org.cn</a></li>
+                            <li>备用：<a href="https://nj1937.historychina.net/" target="_blank">国家公祭网</a></li>
                             <li>开放时间：8:30-16:30（周一闭馆）</li>
                             <li>免费参观，需预约</li>
                         </ul>
@@ -707,9 +868,10 @@
                 <h3 style="color: #ccc; margin: 40px 0 20px;">🌐 在线资源</h3>
                 
                 <div>
-                    <a href="https://www.nj1937.org/" target="_blank" class="link-btn">南京大屠杀纪念馆官网</a>
-                    <a href="http://www.china1937.cn/" target="_blank" class="link-btn">国家公祭网</a>
+                    <a href="http://www.19371213.org.cn/" target="_blank" class="link-btn">南京大屠杀纪念馆官网</a>
+                    <a href="https://nj1937.historychina.net/" target="_blank" class="link-btn">国家公祭网（备用）</a>
                     <a href="https://www.anti-japanese-war.org/" target="_blank" class="link-btn">抗日战争纪念网</a>
+                    <a href="http://www.shac.net.cn/" target="_blank" class="link-btn">中国第二历史档案馆</a>
                     <a href="https://www.zhihu.com/topic/19552710" target="_blank" class="link-btn">知乎南京大屠杀话题</a>
                 </div>
             </div>
@@ -768,6 +930,7 @@
     </footer>
     
     <script>
+        // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -778,6 +941,28 @@
             });
         });
         
+        // 切换详细资料面板
+        function toggleDetail(type) {
+            const panel = document.getElementById('detail-' + type);
+            const allPanels = document.querySelectorAll('.detail-panel');
+            
+            // 先关闭所有面板
+            allPanels.forEach(p => p.classList.remove('active'));
+            
+            // 切换当前面板
+            if (panel && !panel.classList.contains('active')) {
+                panel.classList.add('active');
+                panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        // 关闭详细资料面板
+        function closeDetail() {
+            const allPanels = document.querySelectorAll('.detail-panel');
+            allPanels.forEach(p => p.classList.remove('active'));
+        }
+        
+        // 国家公祭日提醒
         const today = new Date();
         const memorialDay = new Date(today.getFullYear(), 11, 13);
         const daysUntilMemorial = Math.ceil((memorialDay - today) / (1000 * 60 * 60 * 24));
